@@ -1,5 +1,6 @@
-import { Controller, Post, Body } from '@nestjs/common';
+import { Controller, Post, Body, UseInterceptors, UploadedFile } from '@nestjs/common';
 import { OpenAiService } from './openai.service';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @Controller('openai')
 export class OpenaiController {
@@ -13,5 +14,10 @@ export class OpenaiController {
   @Post('callDalle')
   async callDalle() {
     return this.openaiService.callDalle();
+  }
+
+  @Post('multiImages')
+  async generateModernImagesBasedOnPhoto() {
+    return this.openaiService.generateCatalogImagesFromPhoto();
   }
 }
